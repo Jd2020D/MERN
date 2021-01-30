@@ -16,17 +16,17 @@ import Advertisement from './Components/Advertisement';
  
                 
 function App() {
-  return (
-    <div className="app">
-        <Header />
-        <Navigation />
-        <Main>
-            <SubContents />
-            <SubContents />
-            <SubContents />
-            <Advertisement />
-        </Main>
-    </div>
+  <span class="keyword from-rainbow">return</span> (
+    <span class="keyword operator from-rainbow">&lt;</span>div className<span class="keyword operator from-rainbow">=</span><span class="string from-rainbow">"app"</span><span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>Header /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>Navigation /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>Main<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>SubContents /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>SubContents /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>SubContents /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>Advertisement /<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>/Main<span class="keyword operator from-rainbow">&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword operator from-rainbow">&lt;</span>/div<span class="keyword operator from-rainbow">&gt;</span>
   );
 }
                 
