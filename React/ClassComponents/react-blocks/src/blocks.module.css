@@ -1,0 +1,52 @@
+.app{
+    background-color: #dddddd;
+    border : 5px solid black;
+    padding: 20px ;
+    /* height: min-content; */
+}
+.header{
+    background-color: #6aa84f;
+    height: 100px;
+    border : 5px solid black;
+    width: 100%;
+}
+.navigation{
+    background-color: #6fa8dc;
+    height: fit-content;
+    border : 5px solid black;
+    height: 550px;
+    width: 23%;
+}
+.main{
+    background-color: #e06666;
+    text-align: center;
+    padding: 25px;
+    border : 5px solid black;
+
+    width: 70%;
+
+}
+.main section{
+    display: flex;
+    justify-content: space-between;
+}
+.subcontent{
+    background-color: #ffd966;
+    height: 450px;
+    width: 30.5%;
+    border : 5px solid black;
+
+    
+}
+.advertisement{
+    background-color: #b4a7d6;
+    height: 100px;
+    border : 5px solid black;
+    margin-top: 20px;
+
+}
+.wrapper{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
