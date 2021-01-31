@@ -1,0 +1,11 @@
+.formView p{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+form div{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+
+}
