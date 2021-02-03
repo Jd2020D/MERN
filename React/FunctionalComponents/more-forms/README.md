@@ -1,1 +1,17 @@
-<h1 class="text-center">More Forms</h1><p>Using the previous assignment "Hook Form", add error messages.</p><ol><li>If the First Name or Last Name is less than 2 characters, output an error message saying that field must be at least 2 characters.</li><li>The e-mail is less than 5 characters, say the field must be at lease 5 characters.</li><li>The passwords must match and be at least 8 characters.</li></ol><p>These messages can appear right when you render the page, and will disappear in real time.</p><p>Hint: Use state and conditional rendering.</p><p><br></p><figure class="text-center"><img src="https://s3.amazonaws.com/General_V88/boomyeah2015/codingdojo/curriculum/content/chapter/Untitled_Diagram_%281%29.png" style="width: 552px; height: 423px;" width="552" height="423"></figure><p></p>
+<h1 class="text-center">Box Generator</h1>
+<p>Create a component with a form inside which accepts a color. When the form is submitted, add a box to the set of boxes with the appropriate color. You may use whichever method of styling you prefer; refer back to the end of the previous module (React Components) for more information on styling. The boxes should appear next to one another and wrap around if needed.</p>
+<figure><img src="https://s3.amazonaws.com/General_V88/boomyeah2015/codingdojo/curriculum/content/chapter/box-generator-assignment.png"></figure>
+
+
+ <p>
+     Allow the user to create/add boxes of various colors.
+ </p>
+ <p>
+     On successfully adding a new box, have it appear in the set immediately.
+ </p>
+ <p>
+     Ninja Bonus: clear out the color input on successful submission.
+ </p>
+ <p>
+     Ninja Bonus: Add a second input that takes in an integer. This integer will allow the user to specify the height and width of the generated box.
+ </p>
