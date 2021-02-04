@@ -4,14 +4,14 @@ import TabContent from './Components/TabContent';
     
     
 function App() {
-    const [currentContent, setcurrentContent] = useState("");
+    const [currentContent, setcurrentContent] = useState("");
 
 
     return (
         <>
-            <TabsHeaders setContent={ setcurrentContent } />
-            <TabContent content={ currentContent } />
-        </>
+            <TabsHeaders setContent={ setcurrentContent } />
+            <TabContent content={ currentContent } />
+        </>
     );
 }
     
