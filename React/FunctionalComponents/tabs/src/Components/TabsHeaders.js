@@ -2,12 +2,11 @@ import { useState } from 'react';
     
     
 const TabsHeaders = (props) => {
-        const tabs=[  
-                {label:"tab1",content:"tab1 content is showing here."},
-                {label:"tab2",content:"tab2 content is showing here."},
-                {label:"tab3",content:"tab3 content is showing here."}
-              ];  
-        const [currentTabIndex, setCurrentTabIndex] = useState(-1);
+        const [tabs, setTabs] = useState([  
+                {label:"tab1",content:"tab1 content is showing here.",chosen:false},
+                {label:"tab2",content:"tab2 content is showing here.",chosen:false},
+                {label:"tab3",content:"tab3 content is showing here.",chosen:false}
+              ]  );
 
         const headerStyle = (bg,c) => {
                 return  {
@@ -23,28 +22,33 @@ const TabsHeaders = (props) => {
                     };
         };
 
-        const onClickHandler = (e, item,index) => {
-                setCurrentTabIndex(index);
+        const onClickHandler = (e, item,indx) => {
+                let newTabs=tabs.map((item,index)=>{
+                        indx===index?item.chosen=true:item.chosen=false
+                        return item;
+                });
+                setTabs(newTabs);
                 props.setContent(item.content);
             }
             return (
+                <>
                 <div style={{display:'flex',justifyContent:'center'}}>  
                         { 
                         tabs.map( (tab,index) => {
-                                if(index===currentTabIndex)
-
-                                return <div  key={index} style={headerStyle("black","white")}><p>{tab.label}</p></div>
-                                return <div  onMouseLeave={(e)=> e.target.style.background='white'} 
-                                                onMouseOver={(e)=> e.target===e.currentTarget?e.target.style.background='grey':e.stopPropagation()}
-                                                onClick={ (e) => onClickHandler(e, tab,index) } 
-                                                key={index} 
-                                                style={headerStyle("white","black")}>
-                                                <p>{tab.label}</p>
-                                        </div>
-                                
-                                }) 
+                        if(tab.chosen)
+                        return <div  key={index} style={headerStyle("black","white")}><p>{tab.label}</p></div>
+                        return <div  onMouseLeave={(e)=> e.target===e.currentTarget?e.target.style.background='white':e.stopPropagation()} 
+                                        onMouseOver={(e)=> e.target===e.currentTarget?e.target.style.background='grey':e.stopPropagation()}
+                                        onClick={ (e) => onClickHandler(e, tab,index) } 
+                                        key={index} 
+                                        style={headerStyle("white","black")}>
+                                        <p>{tab.label}</p>
+                                </div>
+                        
+                        }) 
                                 }
                 </div>
+                </>
 
             );
 };

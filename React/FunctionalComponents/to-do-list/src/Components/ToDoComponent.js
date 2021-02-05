@@ -15,9 +15,7 @@ export const ToDoComponent = () => {
     setToDoList(newArr);
     }
     const deleteTask= index=>{
-        let newArr=[...toDoList];
-        newArr.splice(index,1);
-        setToDoList(newArr);
+        setToDoList(toDoList.filter((item,indx)=>indx!=index));
     
     }
     return (
