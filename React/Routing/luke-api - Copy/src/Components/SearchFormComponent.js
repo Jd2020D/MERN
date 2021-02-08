@@ -1,8 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import { navigate } from '@reach/router'
 const SearchFormComponent=(props)=> {
-    const [path,setPath]=useState(window.location.pathname.split("/")[1]);
-    const [id,setId]=useState(window.location.pathname.split("/")[2]);
+        console.log(props.info)
+        const [path,setPath]=useState(props.info.searchIn);
+        console.log(path)
+        const [id,setId]=useState(props.info.id);
+        console.log(id)
+
+    // useEffect(() => {
+    //     setPath(props.info.searchIn);
+    //     setId(props.info.id);
+    // }, [props.info.id]);
     const searchPaths=["people","planets","films","species"];
     const handleSubmit=(e)=>{
         e.preventDefault();

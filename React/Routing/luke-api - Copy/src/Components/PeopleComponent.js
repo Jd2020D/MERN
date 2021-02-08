@@ -5,12 +5,12 @@ const PeopleComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
         console.log("inside useEeffect of peaople");
+        props.info({searchIn:'people',id:props.id});
         fetch('https://swapi.dev/api/people/'+props.id)
             .then(response => {
                 if (response.ok) {
                     return response.json();
                   } else {
-                    console.log("wow")
                     throw new Error('Something went wrong');
                   }                
             })

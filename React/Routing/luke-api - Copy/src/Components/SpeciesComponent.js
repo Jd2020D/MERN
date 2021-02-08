@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react';
 
-const PlanetComponent=(props)=> {
+const SpeciesComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
-        fetch('https://swapi.dev/api/planets/'+props.id)
+        props.info({searchIn:'species',id:props.id});
+        fetch('https://swapi.dev/api/species/'+props.id)
             .then(response=>{
                 if (response.ok) {
                     return response.json();
@@ -21,10 +22,10 @@ const PlanetComponent=(props)=> {
             Object.keys(result).length === 0?<div>These aren't the droids you're looking for</div>
             :<div>
                 <h1>{result.name}</h1>
-                <p>Climate: {result.climate}</p>     
-                <p>Terrain: {result.terrain}</p>     
-                <p>Surface Water: {result.surface_water}</p>     
-                <p>Population: {result.population}</p>
+                <p>Classification: {result.classification}</p>     
+                <p>Designation: {result.designation}</p>     
+                <p>Hair colors: {result.hair_colors}</p>     
+                <p>Skin colors: {result.skin_colors}</p>
             </div>
             
         }
@@ -32,4 +33,4 @@ const PlanetComponent=(props)=> {
     )
 }
 
-export default PlanetComponent;
+export default SpeciesComponent;

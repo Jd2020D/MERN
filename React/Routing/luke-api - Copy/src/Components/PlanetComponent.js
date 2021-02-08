@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react';
 const PlanetComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
+        props.info({searchIn:'planets',id:props.id});
         fetch('https://swapi.dev/api/planets/'+props.id)
             .then(response=>{
                 if (response.ok) {

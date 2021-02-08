@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react';
 
-const PlanetComponent=(props)=> {
+const FilmComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
-        fetch('https://swapi.dev/api/planets/'+props.id)
+        props.info({searchIn:'films',id:props.id});
+        fetch('https://swapi.dev/api/films/'+props.id)
             .then(response=>{
                 if (response.ok) {
                     return response.json();
@@ -20,11 +21,11 @@ const PlanetComponent=(props)=> {
         {
             Object.keys(result).length === 0?<div>These aren't the droids you're looking for</div>
             :<div>
-                <h1>{result.name}</h1>
-                <p>Climate: {result.climate}</p>     
-                <p>Terrain: {result.terrain}</p>     
-                <p>Surface Water: {result.surface_water}</p>     
-                <p>Population: {result.population}</p>
+                <h1>{result.title}</h1>
+                <p>Director: {result.director}</p>     
+                <p>Producer: {result.producer}</p>     
+                <p>Release Date: {result.release_date}</p>     
+                <p>Openin Crawl: {result.opening_crawl}</p>
             </div>
             
         }
@@ -32,4 +33,4 @@ const PlanetComponent=(props)=> {
     )
 }
 
-export default PlanetComponent;
+export default FilmComponent;

@@ -8,15 +8,16 @@ import SpeciesComponent from './Components/SpeciesComponent'
 import React,{useState,useEffect} from 'react';
 
 function App() {
-  console.log("render app")
+  const [currentInfo,setCurrentInfo]=useState({searchIn:'people',id:''});
+  console.log("render app",currentInfo)
   return (
     <div className="App">
-          <SearchFormComponent />
+          <SearchFormComponent info={currentInfo}/>
         <Router>
-          <PeopleComponent path="/people/:id/"/>
-          <PlanetComponent path="/planets/:id/"/>
-          <FilmComponent  path="/films/:id/"/>
-          <SpeciesComponent  path="/species/:id/"/>
+          <PeopleComponent info={setCurrentInfo} path="/people/:id/"/>
+          <PlanetComponent info={setCurrentInfo} path="/planets/:id/"/>
+          <FilmComponent info={setCurrentInfo} path="/films/:id/"/>
+          <SpeciesComponent info={setCurrentInfo} path="/species/:id/"/>
         </Router>
 
     </div>

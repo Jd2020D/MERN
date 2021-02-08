@@ -3,7 +3,6 @@ import React,{useState,useEffect} from 'react';
 const SpeciesComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
-        props.info({searchIn:'species',id:props.id});
         fetch('https://swapi.dev/api/species/'+props.id)
             .then(response=>{
                 if (response.ok) {

@@ -3,7 +3,6 @@ import React,{useState,useEffect} from 'react';
 const FilmComponent=(props)=> {
     const [result,setResult]=useState({});
     useEffect(() => {
-        props.info({searchIn:'films',id:props.id});
         fetch('https://swapi.dev/api/films/'+props.id)
             .then(response=>{
                 if (response.ok) {
