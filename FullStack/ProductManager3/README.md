@@ -1,2 +1,8 @@
-<h1 class="text-center">Product Manager (Part II)</h1>
-<p>Continue from the previous assignment. On the main page, below the product form, list out all of your products in your database. Then, create a route so that you can see the specifics for a particular product.</p><figure><img src="https://s3.amazonaws.com/General_V88/boomyeah2015/codingdojo/curriculum/content/chapter/Untitled_Diagram_%284%29.png"></figure><p><br></p>
+<h1>Product Manager (Part III)</h1>
+<p>Update Product Manager so that you can update and delete your products.</p>
+
+<p> Add the route localhost:3000/:id/edit that will include an autofilled form to edit a given product.</p>
+<p> Add a delete button in the List component as well as the detail component that will delete the product from the database</p>
+<p> After you delete the product from the Detail component, redirect to the main view</p>
+<p> After you delete the product from the main view, update the DOM so that the product is removed.</p>
+<p></p>
