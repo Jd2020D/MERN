@@ -1,0 +1,2 @@
+<h1 class="text-center">Product Manager (Part II)</h1>
+<p>Continue from the previous assignment. On the main page, below the product form, list out all of your products in your database. Then, create a route so that you can see the specifics for a particular product.</p><figure><img src="https://s3.amazonaws.com/General_V88/boomyeah2015/codingdojo/curriculum/content/chapter/Untitled_Diagram_%284%29.png"></figure><p><br></p>
