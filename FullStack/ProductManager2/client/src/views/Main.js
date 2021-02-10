@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductForm from '../components/ProductForm';
-import ProductList from '../components/ProductList';
+import ProducstList from '../components/ProducstList';
 import axios from 'axios';
 
 export default () => {
@@ -17,7 +17,7 @@ export default () => {
         <div>
            <ProductForm/>
            <hr/>
-           {loaded && <ProductList products={products}/>}
+           {loaded && <ProducstList products={products}/>}
         </div>
     )
 }

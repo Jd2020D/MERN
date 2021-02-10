@@ -4,11 +4,8 @@ export default () => {
     const [title, setTitle] = useState(""); 
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
-    //handler when the form is submitted
     const onSubmitHandler = e => {
-        //prevent default behavior of the submit
         e.preventDefault();
-        //make a post request to create a new person
         axios.post('http://localhost:8000/api/create', {
             title,
             price,
@@ -17,7 +14,6 @@ export default () => {
             .then(res=>{setDescription("");setPrice(0);setTitle("")})
             .catch(err=>console.log(err ))
     }
-    //onChange to update firstName and lastName
     return (
         <center>
                     <form onSubmit={onSubmitHandler}>

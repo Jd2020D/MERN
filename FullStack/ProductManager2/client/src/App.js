@@ -1,13 +1,13 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import Detail from './views/Detail'
+import ProductDetail from './views/ProductDetail'
 import Main from './views/Main';
 function App() {
   return (
     <div className="App">
       <Router>
         <Main path="/"/>
-        <Detail path="/:id" />
+        <ProductDetail path="/:id" />
       </Router>
     </div>
   );
