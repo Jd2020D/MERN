@@ -3,9 +3,11 @@ import axios from "axios"
 import {
     BrowserRouter as Router,
     Link,
+    Redirect,
     Route, // for later
-    Switch
+    useHistory,
   } from 'react-router-dom'
+import {navigate} from '@reach/router'
 import Players from '../components/Players'
 import PlayersList from '../components/PlayersList'
 import PlayerForm from "../components/PlayerForm"
@@ -13,14 +15,36 @@ import PlayerStatus from "../components/PlayerStatus"
 const Main = props => {
     const [players, setPlayers] = useState([])
     const [loaded,setLoaded]=useState(false);
+    const history = useHistory();
+
     useEffect( () => {
         axios.get("http://localhost:8000/api/getAllplayers")
             .then(response => {setPlayers((response.data))
-                                setLoaded(true)})
+                                setLoaded(true)
+                                })
             .catch(error => console.log("There was an issue: ", error))
     },[])
     const removeFromDom = playerId => {
         setPlayers(players.filter(player => player._id != playerId));
+    }
+    const addToDom= player=>{
+        setPlayers(players.concat(player));
+    }
+    const createPlayer = player =>{
+        return axios.post("http://localhost:8000/api/createNewPlayer",player)
+            .then((response)=>{
+                addToDom(response.data);
+                history.push("/players/list");
+                return [];
+            }) 
+            .catch(err =>{
+                const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+                const errorArr = []; // Define a temp error array to push the messages in
+                for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+                    errorArr.push(errorResponse[key].message)
+                }
+                return errorArr;
+            })
     }
 
     const deletePlayer = (playerId) => {
@@ -30,14 +54,47 @@ const Main = props => {
             })
             .catch(err=>console.log(err))
     }
+    const updatePlayer= (player,id)=>{
+            axios.put("http://localhost:8000/api/players/edit/"+id,player)
+                .then((response) => 
+                setPlayers(players.map((p,indx)=>{
+                    return p._id===id?response.data
+                    :p;
+                })
+                ))
+                // .catch(err =>{
+                //     const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+                //     const errorArr = []; // Define a temp error array to push the messages in
+                //     for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+                //         errorArr.push(errorResponse[key].message)
+                //     }
+                //     // Set Errors
+                //     setErrors(errorArr);
+                // })
+    
+    
+    }
     const gameNavStyle=(targetId,id)=>{
         if(id===targetId)
             return {color:'red'};
         else
             return{};
     }
+    console.log("render main",players,loaded);
     return(
         <div>
+                    <Route exact path="/">
+                        <Redirect to="/players/list"/>
+                    </Route>
+                    <Route exact path="/players">
+                        <Redirect to="/players/list"/>
+                    </Route>
+                    <Route exact path="/status">
+                        <Redirect to="/status/game/1"/>
+                    </Route>
+                    <Route exact path="/status/game">
+                        <Redirect to="/status/game/1"/>
+                    </Route>
                     {loaded&&
                     <Route 
                     path="/players"  
@@ -53,7 +110,7 @@ const Main = props => {
                                     <div>
                                         <Link to="/players/list" style={{color:'red'}}>List</Link> | <Link to="/players/addplayer">Add Player</Link>
                                     </div>  
-                                    <PlayersList {...props} players={players}/>
+                                    <PlayersList {...props} players={players} deletePlayer={deletePlayer}/>
                                 </>
                             )}/>
                             <Route 
@@ -63,7 +120,7 @@ const Main = props => {
                                     <div>
                                         <Link to="/players/list" >List</Link> | <Link to="/players/addplayer" style={{color:'red'}}>Add Player</Link>
                                     </div>
-                                    <PlayerForm {...props}/>
+                                    <PlayerForm onSubmitProp={createPlayer} {...props}/>
                                 </>
                             )}/>
                         </>
@@ -84,7 +141,7 @@ const Main = props => {
                                 <div>
                                     <Link to="/status/game/1" style={gameNavStyle("1",props.match.params.id)}>Game 1</Link> | <Link to="/status/game/2" style={gameNavStyle("2",props.match.params.id)}>Game 2</Link> | <Link to="/status/game/3" style={gameNavStyle("3",props.match.params.id)}>Game 3</Link> 
                                 </div>
-                                <PlayerStatus   {...props} players={players}/>
+                                <PlayerStatus   {...props} updatePlayer={updatePlayer} players={players}/>
                                 
                                 </>
                                 

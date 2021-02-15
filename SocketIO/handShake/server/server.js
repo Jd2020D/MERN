@@ -11,6 +11,6 @@ const io = require('socket.io')(server, { cors: true });
 
 io.on("connection",socket=>{
     console.log("Nice to meet you. (shake hand)")
-    socket.emit("Welcome",{message:"Welcom!"});
+    socket.emit("Welcome",{message:"FKRST message!"});
     
 });

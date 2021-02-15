@@ -7,6 +7,7 @@ const PlayerStatus = (props) => {
         :buttonStatus==="Undecided"&&playerStatus==="Undecided"?{color:'black',backgroundColor:'yellow'}
         :{color:'black',backgroundColor:'white'}
     }
+    console.log("render Player Status");
     return (
         <div>
             <table>
@@ -22,9 +23,9 @@ const PlayerStatus = (props) => {
                 return <tr key={index}>
                             <td>{item.name}</td>
                             <td>
-                            <button style={buttonStyle(item['game'+gameId],"Playing")} onClick={(e)=>{props.deleteProduct(item._id)}}>Playing</button>
-                            <button style={buttonStyle(item['game'+gameId],"Not Playing")} onClick={(e)=>{props.deleteProduct(item._id)}}>Not Playing</button>
-                            <button style={buttonStyle(item['game'+gameId],"Undecided")} onClick={(e)=>{props.deleteProduct(item._id)}}>Undecided</button>
+                            <button style={buttonStyle(item['game'+gameId],"Playing")} onClick={(e)=>props.updatePlayer({['game'+gameId]:"Playing"},item._id)}>Playing</button>
+                            <button style={buttonStyle(item['game'+gameId],"Not Playing")} onClick={(e)=>props.updatePlayer({['game'+gameId]:"Not Playing"},item._id)}>Not Playing</button>
+                            <button style={buttonStyle(item['game'+gameId],"Undecided")} onClick={(e)=>props.updatePlayer({['game'+gameId]:"Undecided"},item._id)}>Undecided</button>
                             </td>
                         </tr>
             })}

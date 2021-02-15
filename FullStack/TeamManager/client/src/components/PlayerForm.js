@@ -2,15 +2,17 @@ import React, { useState } from "react"
 import { navigate, Link, Router } from "@reach/router"
 
 const PlayerForm = props => {
-    const { initialName,initialPrefPosition , onSubmitProp } = props;
-    const [name, setName] = useState(initialName);
-    const [prefPosition, setPrefPosition] = useState(initialPrefPosition);
+    const { onSubmitProp } = props;
+    const [name, setName] = useState("");
+    const [prefPosition, setPrefPosition] = useState("");
+    const [errors, setErrors] = useState([]);
 
     const onSubmit = e => {
         e.preventDefault()
-        onSubmitProp({name});
-
+        onSubmitProp({name,prefPosition}).then(errors=>setErrors(errors))
+        
     }
+    console.log(errors)
     return(
         <div className="container">
             <div className="row">

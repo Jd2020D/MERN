@@ -1,11 +1,8 @@
 import React from 'react'
 
 const PlayersList = props => {
-    const { players } = props;
-    const deletePlayer = (playerId) => {
-        
-    }
-
+    const { players ,deletePlayer } = props;
+    console.log("render Players List");
     return (
         <div>
                        <table>
@@ -23,7 +20,7 @@ const PlayersList = props => {
                             <td>{item.name}</td>
                             <td>{item.prefPosition}</td>
                             <td>
-                            <button onClick={(e)=>{props.deleteProduct(item._id)}}>Delete</button>
+                            <button onClick={(e)=>{deletePlayer(item._id)}}>Delete</button>
                             </td>
                         </tr>
             })}
