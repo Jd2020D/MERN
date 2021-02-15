@@ -2,7 +2,6 @@ import React from 'react'
 
 const PlayersList = props => {
     const { players ,deletePlayer } = props;
-    console.log("render Players List");
     return (
         <div>
                        <table>

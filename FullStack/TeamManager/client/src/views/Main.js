@@ -7,8 +7,6 @@ import {
     Route, // for later
     useHistory,
   } from 'react-router-dom'
-import {navigate} from '@reach/router'
-import Players from '../components/Players'
 import PlayersList from '../components/PlayersList'
 import PlayerForm from "../components/PlayerForm"
 import PlayerStatus from "../components/PlayerStatus"
@@ -30,12 +28,19 @@ const Main = props => {
     const addToDom= player=>{
         setPlayers(players.concat(player));
     }
+    const updateDom = (playerId,update)=>{
+        setPlayers(players.map((player,indx)=>{
+            return player._id===playerId?update
+            :player;
+        }))
+
+    }
     const createPlayer = player =>{
         return axios.post("http://localhost:8000/api/createNewPlayer",player)
             .then((response)=>{
                 addToDom(response.data);
                 history.push("/players/list");
-                return [];
+                return {errors:[],success:response.data};
             }) 
             .catch(err =>{
                 const errorResponse = err.response.data.errors; // Get the errors from err.response.data
@@ -43,7 +48,7 @@ const Main = props => {
                 for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
                     errorArr.push(errorResponse[key].message)
                 }
-                return errorArr;
+                return {errors:errorArr,success:false};
             })
     }
 
@@ -54,23 +59,23 @@ const Main = props => {
             })
             .catch(err=>console.log(err))
     }
-    const updatePlayer= (player,id)=>{
-            axios.put("http://localhost:8000/api/players/edit/"+id,player)
-                .then((response) => 
-                setPlayers(players.map((p,indx)=>{
-                    return p._id===id?response.data
-                    :p;
+    const updatePlayer= (player)=>{
+            let {_id:playerId} = player;
+            delete player['_id'];
+            return axios.put("http://localhost:8000/api/players/edit/"+playerId,player)
+                .then((response) => {
+                    updateDom(playerId,response.data);
+                    return {errors:[],success:response.data};
+                }
+                )
+                .catch(err =>{
+                    const errorResponse = err.response.data.errors; 
+                    const errorArr = []; 
+                    for (const key of Object.keys(errorResponse)) { 
+                        errorArr.push(errorResponse[key].message)
+                    }
+                    return {errors:errorArr,success:false};
                 })
-                ))
-                // .catch(err =>{
-                //     const errorResponse = err.response.data.errors; // Get the errors from err.response.data
-                //     const errorArr = []; // Define a temp error array to push the messages in
-                //     for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
-                //         errorArr.push(errorResponse[key].message)
-                //     }
-                //     // Set Errors
-                //     setErrors(errorArr);
-                // })
     
     
     }
@@ -80,7 +85,6 @@ const Main = props => {
         else
             return{};
     }
-    console.log("render main",players,loaded);
     return(
         <div>
                     <Route exact path="/">

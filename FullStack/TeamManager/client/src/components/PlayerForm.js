@@ -1,5 +1,4 @@
-import React, { useState } from "react"
-import { navigate, Link, Router } from "@reach/router"
+import React, { useState ,useEffect} from "react"
 
 const PlayerForm = props => {
     const { onSubmitProp } = props;
@@ -9,10 +8,18 @@ const PlayerForm = props => {
 
     const onSubmit = e => {
         e.preventDefault()
-        onSubmitProp({name,prefPosition}).then(errors=>setErrors(errors))
+        onSubmitProp({name,prefPosition})
+        .then(response=>response.errors?setErrors(response.errors):'')
         
+
     }
-    console.log(errors)
+    useEffect(() => {
+        return () => {
+            setName('');
+            setErrors([]);
+            setPrefPosition('');
+        }
+    }, [])
     return(
         <div className="container">
             <div className="row">
@@ -23,6 +30,11 @@ const PlayerForm = props => {
                 <div className="col-6">
                     <form onSubmit={ onSubmit }>
                     <div className="form-group">
+                        <p>
+                        {
+                            errors.length>0&&errors.map((err, index) => <small key={index} style={{color:"red"}}>{err}</small>)
+                        }
+                        </p>
                             <label>Player Name:</label>
                             <input onChange={(e)=>setName(e.target.value)} value ={name} type="text" className="form-control"/>
                         </div>
@@ -31,7 +43,6 @@ const PlayerForm = props => {
                             <input onChange={(e)=>setPrefPosition(e.target.value)} value ={prefPosition} type="text" className="form-control"/>
                         </div>
                         <div className="form-group text-right">
-                            <button onClick={()=>navigate("/")} type="button" className="btn btn-secondary btn-sm">Cancel</button>
                             <button className="btn btn-primary btn-sm" style={{marginLeft: "10px"}}>Submit</button>
                         </div>
                     </form>
