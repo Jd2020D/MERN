@@ -5,6 +5,12 @@ const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
+module.exports.getSingleUserById=(request, response) => {
+    User.findOne({_id:jwt.decode(request.cookies.usertoken).id})
+        .then(user => response.json(user))
+        .catch(err => response.status(404).json({errors:{notFound:{message:"We're sorry, but we could not find the User you are looking for. Would you like to add this User to our database?"}}}));
+}
+
 module.exports.createCountry = (request, response) => {
     Country.create(request.body)
         .then(Country => response.json(Country))
@@ -25,7 +31,7 @@ module.exports.register =  (req, res) => {
             .json({ msg: "success!", user: user });
 
       })
-      .catch(err => res.json(err));
+      .catch(err => res.status(400).json(err));
   }
 module.exports.login= async(req, res) => {
         const user = await User.findOne({ email: req.body.email });

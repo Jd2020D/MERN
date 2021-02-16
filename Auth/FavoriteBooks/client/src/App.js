@@ -1,16 +1,11 @@
 import React from 'react';
-import { Router } from '@reach/router';
-import AuthorsTable from './views/AuthorsTable';
-import CreateAuthor from './views/CreateAuthor';
-import UpdateAuthor from './views/UpdateAuthor';
+// import { Router } from '@reach/router';
+import { Main } from './views/Main';
 function App() {
   return (
     <div className="App">
-          <Router>
-            <AuthorsTable path="/"  />
-            <CreateAuthor path="/new"/>
-            <UpdateAuthor path="/edit/:id" />
-          </Router>
+      <Main/>
+
     </div>
   );
 }

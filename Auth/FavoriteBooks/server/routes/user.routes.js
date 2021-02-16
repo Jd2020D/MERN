@@ -1,12 +1,14 @@
 const UserController = require('../controllers/user.controller');
-// const { authenticate } = require('../config/jwt.config');
+const BookController = require('../controllers/book.controller');
+const { authenticate } = require('../config/jwt.config');
 
 module.exports = function(app){
     app.post("/api/register", UserController.register);
     app.post("/api/country", UserController.createCountry);
     app.post("/api/login", UserController.login);
-    // app.get("/api/users", authenticate, Users.getAll);
+    app.get("/api/user/",authenticate, UserController.getSingleUserById);
     app.get("/api/logout", UserController.logout);
+    app.get("/api/books",authenticate, BookController.allBooks);
 
     // app.post('/api/createNewUser', UserController.createUser);
     // app.get('/api/getAllUsers', UserController.findAllUsers);

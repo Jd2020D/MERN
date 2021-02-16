@@ -17,7 +17,7 @@ module.exports.getSinglePlayerById=(request, response) => {
 }
 module.exports.editPlayerById=(request, response) => {
     Player.findOneAndUpdate({ _id: request.params.id }, request.body, { new:true, runValidators: true })
-        .then(updatedPlayer => {console.log(1) ;response.json(updatedPlayer);})
+        .then(updatedPlayer => {response.json(updatedPlayer);})
         .catch(err => response.status(400).json(err));
 }
 module.exports.deletePlayer = (request, response) => {
