@@ -1,20 +1,26 @@
-import React, { useState } from "react"
-// import { navigate, Link, Router } from "@reach/router"
-
+import React, { useState,useEffect } from "react"
+import axios from 'axios';
 const RegisterForm = props => {
-    const { onSubmitProp,changeView } = props;
+    const { onSubmitProp,changeView, countries } = props;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [country, setCountry] = useState("");
-
-    const onSubmit = e => {
+    const [country, setCountry] = useState({name:'Selecet your country'});
+    const [errors,setErrors]=useState([]);
+    const onSubmit = async e => {
         e.preventDefault()
-        onSubmitProp({firstName,lastName,email,password,confirmPassword,country});
+        const res=await onSubmitProp({firstName,lastName,email,password,confirmPassword,country});
+        setErrors(res.errors);
+        if(res.errors.length<=0)
+            res.source.cancel();
 
     }
+    useEffect(() => {
+        return () => {
+        }
+    }, [])
     return(
         <div className="container" style={{border:'1px solid black',height:'200px'}}>
             <div className="row">
@@ -46,13 +52,19 @@ const RegisterForm = props => {
                         </div>
                         <div className="form-group">
                             <label>Country:</label>
-                            <input onChange={(e)=>setCountry(e.target.value)} value ={country} type="text" className="form-control"/>
+                            <select  value ={country} onChange={e => setCountry(e.target.value)}>
+                            <option  value=''>{country.name}</option>
+                            {countries.map((country, idx) => (
+                                <option key={idx} value={country._id}>{country.name}</option>
+                            ))}
+                            </select>
                         </div>
                         <div className="form-group text-right">
-                            <button onClick={()=>changeView()} type="button" className="btn btn-secondary btn-sm">Cancel</button>
+                        <a onClick={()=>changeView()}  style={{textDecoration:'underline',color:'blue'}}>have an account?</a>
                             <button className="btn btn-primary btn-sm" style={{marginLeft: "10px"}}>Submit</button>
                         </div>
                     </form>
+                    {errors.map((err, index) => <p key={index} style={{color:"red"}}>{err}</p>)}
                 </div>
             </div>
         </div>
